@@ -14,7 +14,7 @@ class Term
 
   def pre_validate!(from, to)
     raise ArgumentError, "from and to must be the same class" unless same_class?(from, to)
-    raise ArgumentError, "from or to is a instance of the invalid class" unless proper_class?(from)
+    raise ArgumentError, "from and to must be a kind of Time, DateTime, or String class" unless proper_class?(from)
   end
 
   def parse_arguments(from, to)
@@ -23,7 +23,7 @@ class Term
   end
 
   def post_validate!
-    raise ArgumentError, "from is later than to" if from > to
+    raise ArgumentError, "from must be earlier than to" if from > to
   end
 
   def same_class?(from, to)
