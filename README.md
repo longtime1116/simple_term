@@ -1,6 +1,9 @@
 # Term
-You can manage terms of time well by this gem.
-You can know whether two terms are overlapped each other.
+
+This gem provides the minimum necessary functions to manage term.
+You can manage the beginning and ending date time of a term.
+You can also check whether two terms are overlapped.
+When the beginning or ending date time is indefinite, it can be represented by nil.
 
 ## Installation
 
@@ -29,21 +32,83 @@ t2 = Term.new(from: DateTime.parse("2018-01-01 00:00:00"), to: DateTime.parse("2
 t3 = Term.new(from: "2018-01-01 00:00:00", to: "2018-12-21 23:59:59")
 
 # arguments are parsed to DateTime class
-t1.from #=> #<DateTime: 2018-01-01T00:00:00+00:00 ((2458120j,0s,0n),+0s,2299161j)>
-t1.to #=> #<DateTime: 2018-12-31T23:59:59+00:00 ((2458484j,86399s,0n),+0s,2299161j)>
+t1.from #=> 2018-01-01 00:00:00 +0900
+t1.to #=> 2018-12-31 23:59:59 +0900
+
+# you can represent indefinite term.
+t4 = Term.new(from: Time.parse("2018-01-01 00:00:00")))
+t4.from #=> 2018-01-01 00:00:00 +0900
+t4.to #=> nil
+
 ```
 
 ### check overlap
 
+case1. There are no indefinite terms.
+
 ```ruby
+               t1
+|------------------------------|
+                                t2
+                      |--------------------|
+                        overlap
+                      |--------|
+
 t1 = Term.new(from: "2018-01-01 00:00:00", to: "2018-12-31 23:59:59")
 t2 = Term.new(from: "2018-07-01 00:00:00", to: "2019-06-30 23:59:59")
 
 # check whether both terms are overlapped
 t1.overlap_with?(t2) #=> true
 
-# the overlapping term is calculated
-t1.overlap_with(t2) #=> #<Term:0x007fd402a44a10 @from=#<DateTime: 2018-07-01T00:00:00+00:00 ((2458301j,0s,0n),+0s,2299161j)>, @to=#<DateTime: 2018-12-31T23:59:59+00:00 ((2458484j,86399s,0n),+0s,2299161j)>>
+# the overlapped term is calculated
+overlap = t1.overlap_with(t2)
+overlap.from #=> 2018-07-01 00:00:00
+overlap.to #=> 2018-12-31 23:59:59
+
+```
+
+case2. There are an indefinite term and the overlapped term is definite
+
+```ruby
+               t1
+|------------------------------|
+                                t2
+                      |--------------------...
+                        overlap
+                      |--------|
+
+t1 = Term.new(from: "2018-01-01 00:00:00", to: "2018-12-31 23:59:59")
+t2 = Term.new(from: "2018-07-01 00:00:00", to: nil)
+
+# check whether both terms are overlapped
+t1.overlap_with?(t2) #=> true
+
+# the overlapped term is calculated
+overlap = t1.overlap_with(t2)
+overlap.from #=> 2018-07-01 00:00:00
+overlap.to #=> 2018-12-31 23:59:59
+```
+
+case3. There are an indefinite term and the overlapped term is also indefinite
+
+```ruby
+                    t1
+|------------------------------------------...
+                                t2
+                      |--------------------...
+                              overlap
+                      |--------------------...
+
+t1 = Term.new(from: "2018-01-01 00:00:00", to: nil)
+t2 = Term.new(from: "2018-07-01 00:00:00", to: nil)
+
+# check whether both terms are overlapped
+t1.overlap_with?(t2) #=> true
+
+# the overlapped term is calculated
+overlap = t1.overlap_with(t2)
+overlap.from #=> 2018-07-01 00:00:00
+overlap.to #=> nil
 ```
 
 ## Development
