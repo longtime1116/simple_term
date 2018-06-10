@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["longtime1116"]
   spec.email         = ["longtime1116@gmail.com"]
 
-  spec.summary       = %q{This gem helps you manage terms.}
-  spec.description   = %q{Create the instances of Term class and manage terms}
+  spec.summary       = %q{This gem provides the minimum necessary functions to manage term.}
+  spec.description   = %q{You can manage the beginning and ending date time of a term. You can also check whether two terms are overlapped. When the beginning or ending date time is indefinite, you can represent it by nil.}
   spec.homepage      = "https://github.com/longtime1116/term"
   spec.license       = "MIT"
 
