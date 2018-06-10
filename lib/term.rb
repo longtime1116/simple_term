@@ -10,6 +10,10 @@ class Term
     post_validate!
   end
 
+  def ==(target)
+    from == target.from && to == target.to ? true : false
+  end
+
   def overlap_with?(target)
     if perfectly_indefinite? || target.perfectly_indefinite?
       true
