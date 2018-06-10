@@ -1,9 +1,9 @@
 # Term
 
-This gem provides the minimum necessary functions to manage term.
+This gem provides the minimum necessary functions to manage terms.
 You can manage the beginning and ending date time of a term.
 You can also check whether two terms are overlapped.
-When the beginning or ending date time is indefinite, it can be represented by nil.
+When the beginning or ending date time is indefinite, you can represent it by nil.
 
 ## Installation
 
@@ -78,7 +78,7 @@ case2. There are an indefinite term and the overlapped term is definite
                       |--------|
 
 t1 = Term.new(from: "2018-01-01 00:00:00", to: "2018-12-31 23:59:59")
-t2 = Term.new(from: "2018-07-01 00:00:00", to: nil)
+t2 = Term.new(from: "2018-07-01 00:00:00")
 
 # check whether both terms are overlapped
 t1.overlap_with?(t2) #=> true
@@ -99,8 +99,8 @@ case3. There are an indefinite term and the overlapped term is also indefinite
                               overlap
                       |--------------------...
 
-t1 = Term.new(from: "2018-01-01 00:00:00", to: nil)
-t2 = Term.new(from: "2018-07-01 00:00:00", to: nil)
+t1 = Term.new(from: "2018-01-01 00:00:00")
+t2 = Term.new(from: "2018-07-01 00:00:00")
 
 # check whether both terms are overlapped
 t1.overlap_with?(t2) #=> true
