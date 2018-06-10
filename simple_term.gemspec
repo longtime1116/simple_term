@@ -4,14 +4,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "term/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "term"
+  spec.name          = "simple_term"
   spec.version       = Term::VERSION
   spec.authors       = ["longtime1116"]
   spec.email         = ["longtime1116@gmail.com"]
 
   spec.summary       = %q{This gem provides the minimum necessary functions to manage term.}
   spec.description   = %q{You can manage the beginning and ending date time of a term. You can also check whether two terms are overlapped. When the beginning or ending date time is indefinite, you can represent it by nil.}
-  spec.homepage      = "https://github.com/longtime1116/term"
+  spec.homepage      = "https://github.com/longtime1116/simple_term"
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.
