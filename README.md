@@ -10,16 +10,16 @@ When the beginning or ending date time is indefinite, you can represent it by ni
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'term'
+gem 'simple_term', require: "term"
 ```
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
-    $ gem install term
+    $ gem install simple_term
 
 ## Usage
 
